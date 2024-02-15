@@ -1,28 +1,23 @@
 class Salmon extends Animal {
-  int yspeed = int(random(3, 5));
-  int xspeed = int(random(2, 10));
-  int size = 19;
-  Salmon(int x, int y) {
-    super(x, y);
-  }
+  PVector v = new PVector((int(random(4, 5))), int(random(4, 5)));
+
+  Salmon(int x, int y, int sx, int sy) {
+    super(x,y, sx, sy); 
+    img = loadImage("https://media.istockphoto.com/id/1302726697/vector/vector-chinook-salmon-cartoon-illustration.jpg?s=612x612&w=0&k=20&c=mUeHLLwe8NO5ImqI9pzQEKUVG47DfMVwQhTAhXFyYBw=");}
+
 
   void move() {
-    if (ax >= width - size/2 ||
-      ax <= size/2) {
-      xspeed*= -1;
+    if (position.x >= width - size.x ||
+      position.x <= size.x) {
+      v.x*= -1;
     }
-    if (ay >= height - size/2 -50 ||
-      ay <= size/2+50) {
-      yspeed*= -1;
+    if (position.y >= height - size.y -50 ||
+      positiony <= size.y+50) {
+      v.y*= -1;
     }
-    ax+= xspeed;
-    ay+= yspeed;
+    position.x+= v.x;
+    position.y+= v.y;
   }
 
-//override
 
-void animal_display() {
-  fill(255, 145, 164);
-  circle(ax, ay, size);
-}
 }

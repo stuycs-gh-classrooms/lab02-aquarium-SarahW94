@@ -6,7 +6,7 @@ class Tank {
   int floor;
   int species;
   PImage img = loadImage("https://media.istockphoto.com/id/672054060/photo/underwater-scene-with-bubbles-and-sunbeams-3d-illustration.jpg?s=612x612&w=0&k=20&c=nYO68AWp8QZpfrSV9QKRxb5EcXK8k7aDswiV1y0BOak=");
-  ArrayList<Animal> a = new ArrayList();
+  ArrayList<Animal> a = new ArrayList<Animal>();
 
 
   Tank(int tx, int ty, int tw, int th, int heightfloor) {
@@ -39,31 +39,21 @@ class Tank {
   }
 
   void addAnimal(int x, int y, int species) {
-    if (y <= height &&
-      y >= height-50) {
-      a.add(new Crabs(x, y));
+    if (species == 0) {
+      species = int(random(1,5));
+    }
+    if (species == STARFISH) {
+      animals.add(new Starfish(mx, my, 50, 50, species));
+    } else if (species == CLOWNFISH) {
+      animals.add(new Clownfish(mx, my, 50, 50, species));
+    } else if (species == CRAB) {
+      animals.add(new Crab(mx, my, 45, 30, species));
+    } else if (type == SALMON) {
+      animals.add(new Salmon(mx, my, 60, 35, species));
     } else {
-      a.add(new Salmon(x, y));
+      animals.add(new Animal(mx, my, 60, 60, species));
     }
   }
-}
-
-//  void addAnimal(int mx, int my, int type) {
-//    if (type == -1) {
-//      type = int(random(4));
-//    }
-//    if (type == STARFISH) {
-//      animals.add(new Starfish(mx, my, 50, 50, type));
-//    } else if (type == CLOWNFISH) {
-//      animals.add(new Clownfish(mx, my, 50, 50, type));
-//    } else if (type == CRAB) {
-//      animals.add(new Crab(mx, my, 45, 30, type));
-//    } else if (type == SALMON) {
-//      animals.add(new Salmon(mx, my, 60, 35, type));
-//    } else {
-//      animals.add(new Animal(mx, my, 60, 60, type));
-//    }
-//  }
 //-------------------------------------------------------
 
 //class Tank {

@@ -26,14 +26,43 @@ class Animal {
 
   void die() {
     hunger();
+    eat();
     if (hungerbar<=0) {
       t.removeAnimal(this);
     }
   }
 
   void eat() {
-  }
+    for (int r = 0; i < food.size(); r++) {
+      food f = food.get(r);
+      float testX = 0;
+      float testY = 0;
+      //We check against the left edge.
+      if (f.pos.x < position.x) {
+        testX = position.x;
+      }
+      //We check against the right edge.
 
+      else if (f.pos.x> position.x + size.x) {
+        testX = position.x + size.x;
+      }
+      //We check against the top edge.
+
+      if (f.pos.y < position.y) {
+        testY = position.y;
+      }
+      //We check against the top edge.
+
+      else if (f.pos.y> position.y + size.y) {
+        testY = position.y + size.y;
+      }
+      //check dist
+      if ((dist(f.pos.x, f.pos.y, testX, testY))<= f.nourishment){
+        food.remove(f);
+        hungerbar += nourishment;}
+    }
+  }
+  
   void move() {
     if (position.x >= width -size.x  ||
       position.x <= 0) {
