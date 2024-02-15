@@ -1,20 +1,18 @@
 class Animal {
-  int ax;
-  int ay;
+  PVector position; 
+  PVector size;
   color c;
-  int size;
   int yspeed = int(random(1, 3));
   int xspeed = int(random(1, 6));
 
 
-  Animal(int x, int y) {
-    ax = x;
-    ay = y;
-    size = 10;}
+  Animal(int x, int y, int sx, int sy) {
+  position = new PVector(x,y);
+  size = new PVector(sx,sy);}
 
     
 void move() {
-    if (ax >= width - size/2 ||
+    if (position.x >= width - size.x ||
         ax <= size/2) {
         xspeed*= -1;
      }
