@@ -1,28 +1,25 @@
-class Crabs extends Animal {
-  int yspeed = int(random(1, 2));
-  int xspeed = int(random(1, 8));
-  int size = int(random(10, 15));
-  Crabs(int x, int y) {
-    super(x, y);
+class Crab extends Animal {
+  boolean hitFloorYet = false;
+  Crab(int x, int y, int sx, int sy) {
+    super(x, y, sx, sy);
+    v.y = 1;
+    img = loadImage("Crab.png");
   }
-
-  void move() {
-    if (ax >= width - size/2 ||
-      ax <= size/2) {
-      xspeed*= -1;
-    }
-    if (ay >= height - size/2 ||
-      ay <= height-50) {
-      yspeed*= -1;
-    }
-    ax+= xspeed;
-    ay+= yspeed;
+  
+  void setSpeed() {
+    v.mult(int(random(1, 3)) * 0.5);
   }
-
-//override
-
-void animal_display() {
-  fill(255, 0, 0);
-  circle(ax, ay, size);
-}
+ 
+  void collision() {
+    if (position.x >= width - size.x || position.x <= 0) {
+      v.x *= -1;
+    }
+    if (hitFloorYet && position.y < height - floorH) {
+      v.y *= -1;
+    }
+    if (position.y > height - size.y)    {
+      hitFloorYet = true;
+      v.y *= -1;
+    }
+  }
 }
