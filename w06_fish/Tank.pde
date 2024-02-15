@@ -34,8 +34,8 @@ class Tank {
     }
   }
   
-  void removeAnimal(int index) {
-    a.remove(index);
+  void removeAnimal(Animal animal) {
+    a.remove(animal);
   }
 
   void addAnimal(int x, int y, int species) {
