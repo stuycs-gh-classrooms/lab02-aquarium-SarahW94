@@ -1,25 +1,25 @@
 class Crab extends Animal {
-  boolean hitFloorYet = false;
-  Crab(int x, int y, int sx, int sy) {
-    super(x, y, sx, sy);
-    v.y = 1;
+
+  Crab(int x, int y, int sx, int sy, int sp) {
+    super(x, y, sx, sy, sp);
     img = loadImage("Crab.png");
   }
   
-  void setSpeed() {
-    v.mult(int(random(1, 3)) * 0.5);
-  }
- 
-  void collision() {
-    if (position.x >= width - size.x || position.x <= 0) {
-      v.x *= -1;
+   void speed(){
+    v = new PVector((int(random(4, 8))), int(random(1, 3)));
+}
+
+  void move() {
+    if (position.x >= width - size.x  ||
+      position.x <= 0) {
+      v.x*= -1;
     }
-    if (hitFloorYet && position.y < height - floorH) {
-      v.y *= -1;
+    if (position.y >= height - size.y ||
+      position.y <= height-50) {
+      v.y*= -1;
     }
-    if (position.y > height - size.y)    {
-      hitFloorYet = true;
-      v.y *= -1;
-    }
+    
+    position.x+= v.x;
+    position.y+= v.y;
   }
 }

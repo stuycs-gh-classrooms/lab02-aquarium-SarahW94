@@ -1,68 +1,67 @@
 class Animal {
   PVector position;
-  PVector v = new PVector((int(random(1, 5))), int(random(1, 5)));
   PVector size;
-  int hungerbar;
+  PVector v;
+  int i = 0;
+  int num = 0;
   int nourishment;
-  int time;
+  int species;
+  int start;
   PImage img;
 
-  Animal(int x, int y, int sx, int sy) {
+  Animal(int x, int y, int sx, int sy, int sp) {
     position = new PVector(x, y);
-    size = new PVector (sx, sy);
-    time = millis();
+    size = new PVector(sx, sy);
+    species = sp;
+    start = millis();
+    speed();
   }
 
-  void setHunger() {
-    hungerbar = int(random(10, 100));
+  void speed() {
+    v = new PVector((int(random(1, 5))), int(random(1, 5)));
   }
 
-
-  void hunger() {
-    if (millis() % 5000 == 0) {
-      hungerbar-=1;
-    }
-  }
 
   void die() {
-    hunger();
     eat();
-    if (hungerbar<=0) {
+    if (millis() - start >= 5000) {
       t.removeAnimal(this);
     }
   }
 
+
   void eat() {
-    for (int r = 0; i < food.size(); r++) {
-      food f = food.get(r);
+    for (int r = 0; r < f.size(); r++) {
+      food fo = f.get(r);
       float testX = 0;
       float testY = 0;
       //We check against the left edge.
-      if (f.pos.x < position.x) {
+      if (fo.pos.x < position.x) {
         testX = position.x;
       }
       //We check against the right edge.
 
-      else if (f.pos.x> position.x + size.x) {
+      else if (fo.pos.x> position.x + size.x) {
         testX = position.x + size.x;
       }
       //We check against the top edge.
 
-      if (f.pos.y < position.y) {
+      if (fo.pos.y < position.y) {
         testY = position.y;
       }
-      //We check against the top edge.
+      //We check against the bottom edge.
 
-      else if (f.pos.y> position.y + size.y) {
+      else if (fo.pos.y> position.y + size.y) {
         testY = position.y + size.y;
       }
       //check dist
-      if ((dist(f.pos.x, f.pos.y, testX, testY))<= f.nourishment){
-        food.remove(f);
-        hungerbar += nourishment;}
+      if ((dist(fo.pos.x, fo.pos.y, testX, testY))<= fo.nourishment) {
+        f.remove(fo);
+        start = millis();
+      }
     }
   }
-  
+
   void move() {
     if (position.x >= width -size.x  ||
       position.x <= 0) {

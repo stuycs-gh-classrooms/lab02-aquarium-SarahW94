@@ -4,7 +4,7 @@ int tankY = 50;
 int floorH = 100;
 int tankW;
 int tankH;
-ArrayList<Food> food;
+ArrayList<food> f;
 
 
 int SALMON = 1;
@@ -15,11 +15,12 @@ int CLOWNFISH = 4;
 
 void setup() {
   size(800, 600);
-  food = new ArrayList<food>();
   tankW = width;
   tankH = height - 50;
   t = new Tank(tankX, tankY, tankW, tankH, floorH);
   t.display();
+  frameRate(60);
+  f = new ArrayList<food>();
 }//setup
 
 
@@ -27,10 +28,11 @@ void draw() {
   background(150);
   t.moveAnimals();
   t.display();
-  for (int r =0; r<food.size(); r++) {
-    food f = food.get(r);
-    f.move(); 
-    f.display();
+  t.runningDeath();
+
+  for (int r =0; r<f.size(); r++) {
+    f.get(r).move();
+    f.get(r).display();
   }
 }
 
@@ -48,8 +50,12 @@ void keyPressed() {
     t.addAnimal(mouseX, mouseY, 3);
   } else if (key == '4') {
     t.addAnimal(mouseX, mouseY, 4);
+    } else if (key == 'f') {
+    f.add(new food(mouseX, mouseY));
   }
+
 }
+
 
 
 

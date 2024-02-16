@@ -1,9 +1,9 @@
-class Food {
+class food {
   int nourishment;
   PVector pos;
   PVector v; 
 
-  Food(int x, int y){
+  food(int x, int y){
     pos = new PVector(x,y);
     nourishment = int(random(5, 10));
     v = new PVector(int(random(1,2)), int(random(1,2)));
